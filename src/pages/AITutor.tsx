@@ -1,5 +1,6 @@
 import { Bot, Send, Trash2 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -7,6 +8,9 @@ import { streamChat, type Msg } from "@/lib/streamChat";
 import ReactMarkdown from "react-markdown";
 
 export default function AITutor() {
+  const location = useLocation();
+  const initialPrompt = (location.state as any)?.initialPrompt;
+
   const [messages, setMessages] = useState<Msg[]>([
     { role: "assistant", content: "Hi! I'm your AI tutor. Ask me anything about your courses, study techniques, or career guidance. 📚" },
   ]);
@@ -14,15 +18,24 @@ export default function AITutor() {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const hasAutoSent = useRef(false);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async () => {
-    const text = input.trim();
-    if (!text || isLoading) return;
-    const userMsg: Msg = { role: "user", content: text };
+  // Auto-send initial prompt from navigation state
+  useEffect(() => {
+    if (initialPrompt && !hasAutoSent.current) {
+      hasAutoSent.current = true;
+      sendMessage(initialPrompt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialPrompt]);
+
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return;
+    const userMsg: Msg = { role: "user", content: text.trim() };
     const updated = [...messages, userMsg];
     setMessages(updated);
     setInput("");
@@ -55,6 +68,8 @@ export default function AITutor() {
       setIsLoading(false);
     }
   };
+
+  const handleSend = () => sendMessage(input);
 
   const clearChat = () => {
     setMessages([{ role: "assistant", content: "Chat cleared! How can I help you? 📚" }]);
