@@ -4,11 +4,13 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-tutor`;
 
 export async function streamChat({
   messages,
+  topicId,
   onDelta,
   onDone,
   onError,
 }: {
   messages: Msg[];
+  topicId?: string;
   onDelta: (text: string) => void;
   onDone: () => void;
   onError: (err: string) => void;
@@ -19,7 +21,7 @@ export async function streamChat({
       "Content-Type": "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
     },
-    body: JSON.stringify({ messages }),
+    body: JSON.stringify({ messages, topic_id: topicId }),
   });
 
   if (!resp.ok) {

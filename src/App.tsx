@@ -8,12 +8,12 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
-import MyCourses from "./pages/MyCourses";
-import Explore from "./pages/Explore";
-import CourseDetail from "./pages/CourseDetail";
+import MyLearning from "./pages/MyLearning";
+import TopicDetail from "./pages/TopicDetail";
+import Uploads from "./pages/Uploads";
 import AITutor from "./pages/AITutor";
-import OfflineLibrary from "./pages/OfflineLibrary";
-import Community from "./pages/Community";
+import Quizzes from "./pages/Quizzes";
+import Roadmaps from "./pages/Roadmaps";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
@@ -37,12 +37,12 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/my-courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
-            <Route path="/explore" element={<ProtectedRoute><Explore /></ProtectedRoute>} />
-            <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
+            <Route path="/my-learning" element={<ProtectedRoute><MyLearning /></ProtectedRoute>} />
+            <Route path="/topic/:topicId" element={<ProtectedRoute><TopicDetail /></ProtectedRoute>} />
+            <Route path="/uploads" element={<ProtectedRoute><Uploads /></ProtectedRoute>} />
             <Route path="/ai-tutor" element={<ProtectedRoute><AITutor /></ProtectedRoute>} />
-            <Route path="/offline-library" element={<ProtectedRoute><OfflineLibrary /></ProtectedRoute>} />
-            <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
+            <Route path="/quizzes" element={<ProtectedRoute><Quizzes /></ProtectedRoute>} />
+            <Route path="/roadmaps" element={<ProtectedRoute><Roadmaps /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
