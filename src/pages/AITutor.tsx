@@ -98,7 +98,7 @@ export default function AITutor() {
               <SelectValue placeholder="General chat" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">General</SelectItem>
+              <SelectItem value="general">General</SelectItem>
               {topics.map((t: any) => <SelectItem key={t.id} value={t.id}>{t.title}</SelectItem>)}
             </SelectContent>
           </Select>
