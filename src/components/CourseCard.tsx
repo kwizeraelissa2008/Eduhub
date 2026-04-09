@@ -1,4 +1,5 @@
 import { CourseBadge } from "./CourseBadge";
+import { useNavigate } from "react-router-dom";
 
 interface CourseCardProps {
   title: string;
@@ -7,6 +8,7 @@ interface CourseCardProps {
   progressPercent: number;
   badgeType: string;
   timeLeft?: string;
+  courseId?: string;
 }
 
 const progressColors: Record<string, string> = {
@@ -22,11 +24,16 @@ export function CourseCard({
   progressPercent,
   badgeType,
   timeLeft,
+  courseId,
 }: CourseCardProps) {
+  const navigate = useNavigate();
   const progressColor = progressColors[badgeType] || "bg-primary";
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md">
+    <div
+      className="rounded-xl border border-border bg-card p-5 transition-shadow hover:shadow-md cursor-pointer"
+      onClick={() => courseId && navigate(`/course/${courseId}`)}
+    >
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <h3 className="text-base font-semibold text-foreground">{title}</h3>
