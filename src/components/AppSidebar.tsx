@@ -30,7 +30,7 @@ const toolItems = [
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const location = useLocation();
+  
   const { signOut } = useAuth();
 
   return (

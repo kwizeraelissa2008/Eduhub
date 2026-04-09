@@ -1,4 +1,4 @@
-import { Bot } from "lucide-react";
+
 
 interface AIAssistantProps {
   message: string;

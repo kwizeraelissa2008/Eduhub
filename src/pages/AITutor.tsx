@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export default function AITutor() {
-  const [messages, setMessages] = useState([
-    { role: "assistant" as const, content: "Hi! I'm your AI tutor. Ask me anything about your courses, study techniques, or career guidance." },
+  const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([
+    { role: "assistant", content: "Hi! I'm your AI tutor. Ask me anything about your courses, study techniques, or career guidance." },
   ]);
   const [input, setInput] = useState("");
 
