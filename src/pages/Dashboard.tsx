@@ -74,6 +74,7 @@ export default function Dashboard() {
             ) / 10;
             return (
               <CourseCard
+                courseId={course.id}
                 key={enrollment.id}
                 title={course.title}
                 currentModule={enrollment.current_module}
