@@ -71,7 +71,7 @@ export default function AITutor() {
     try {
       await streamChat({
         messages: updated,
-        topicId: topicId || undefined,
+        topicId: topicId && topicId !== "general" ? topicId : undefined,
         onDelta: upsert,
         onDone: () => setIsLoading(false),
         onError: (err) => {
